@@ -9,7 +9,7 @@ const Article = require('./models/Article');
 const Country = require('./models/Country');
 const Source = require('./models/Source');
 
-mongoose.connect('mongodb://localhost/ifg');
+mongoose.connect('mongodb://localhost/geopolitique');
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -20,7 +20,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: {secure: false}
-}))
+}));
 
 app.get('/', (req, res) => {
   res.render('home');
@@ -33,7 +33,10 @@ app.get('/pays/:pays', (req, res) => {
 });
 
 app.get('/new_article', (req, res) => {
-  res.render('forms/article');
+  Country.find().then((err, countries) => {
+    console.log(country);
+    res.render('forms/article', {countries: countries});
+  });
 });
 
 app.get('/new_country', (req, res) => {
@@ -68,12 +71,13 @@ app.post('/new_country', (req, res) => {
     langue: req.body.langue,
     pnb: req.body.pnb,
     pnbhab: req.body.pnbhab,
-    idh: req.body.idh,
-    articles: []
+    idh: req.body.idh
   });
-  country.save().then(() => {
+  country.save((err) => {
+    if(err) { throw err; }
+    console.log('Pays créé (ou pas)');
     res.redirect('/');
-  }, err => console.log(err));
+  });
 });
 
 app.listen(3000);
