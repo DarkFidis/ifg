@@ -1,0 +1,29 @@
+{
+  "name": "ifg",
+  "version": "1.0.0",
+  "description": "Notes de Géopolitique",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DarkFidis/ifg.git"
+  },
+  "author": "DarkFidis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DarkFidis/ifg/issues"
+  },
+  "homepage": "https://github.com/DarkFidis/ifg#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "color": "^2.0.1",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.0.1",
+    "passport": "^0.4.0"
+  }
+}
