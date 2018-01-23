@@ -11,7 +11,7 @@
   <body>
     <% include ../shared/navbar %>
     <div class="container">
-      <form action="/new_country">
+      <form action="/new_country" method="post">
         <div class="form-group">
           <label for="exampleFormControlInput1">Nom</label>
           <input type="text" name="nom" class="form-control" id="exampleFormControlInput1" placeholder="Pays">
@@ -30,7 +30,7 @@
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput1">Population</label>
-          <input type="number" name="population" class="form-control" id="exampleFormControlInput1" placeholder="Population">
+          <input type="number" step="0.1" name="population" class="form-control" id="exampleFormControlInput1" placeholder="Population">
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput1">Langue</label>
@@ -46,7 +46,7 @@
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput1">IDH</label>
-          <input type="number" name="idh" class="form-control" id="exampleFormControlInput1" placeholder="IDH">
+          <input type="number" step="0.001" name="idh" class="form-control" id="exampleFormControlInput1" placeholder="IDH">
         </div>
         <button type="submit" name="button" class="btn btn-primary">Créer pays</button>
       </form>

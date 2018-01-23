@@ -152,7 +152,7 @@ var France = rsr.path("M467.5,193.1c-0.1,0.4-0.2,1-0.2,1.3c0,0-0.1,0.1-0.1,0.1c-
 	'stroke-opacity': '1',
   'fill-opacity': '0.5',
 	fill: '#1C9AD6',
-  'href': '/france',
+  'href': '/pays/france',
   'target': 'blank'
 }).data('id', 'France');
 

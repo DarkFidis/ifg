@@ -13,12 +13,20 @@ mongoose.connect('mongodb://localhost/ifg');
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {secure: false}
+}))
 
 app.get('/', (req, res) => {
   res.render('home');
 });
 
-app.get('/:pays', (req, res) => {
+app.get('/pays/:pays', (req, res) => {
   Country.findOne({url: req.params.pays}).populate("articles").exec((err, country) => {
     console.log(country);
   });
@@ -33,7 +41,7 @@ app.get('/new_country', (req, res) => {
 });
 
 app.post('/new_article', (req, res) => {
-  let article = Article.new({
+  let article = new Article({
     number: req.body.number,
     released: new Date(req.body.year + '-' + req.body.month + '-' + req.body.day),
     title: req.body.title,
@@ -51,7 +59,7 @@ app.post('/new_article', (req, res) => {
 });
 
 app.post('/new_country', (req, res) => {
-  let country = Country.new({
+  let country = new Country({
     nom: req.body.nom,
     url: req.body.url,
     capitale: req.body.capitale,
