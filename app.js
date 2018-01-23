@@ -5,8 +5,9 @@ const session = require('express-session');
 const passport = require('passport');
 const color = require('color');
 const bodyParser = require('body-parser');
-const Article = require('/models/Article');
-const Country = require('/models/Country');
+const Article = require('./models/Article');
+const Country = require('./models/Country');
+const Source = require('./models/Source');
 
 mongoose.connect('mongodb://localhost/ifg');
 
@@ -17,8 +18,54 @@ app.get('/', (req, res) => {
   res.render('home');
 });
 
+app.get('/:pays', (req, res) => {
+  Country.findOne({url: req.params.pays}).populate("articles").exec((err, country) => {
+    console.log(country);
+  });
+});
+
 app.get('/new_article', (req, res) => {
   res.render('forms/article');
+});
+
+app.get('/new_country', (req, res) => {
+  res.render('forms/country');
+});
+
+app.post('/new_article', (req, res) => {
+  let article = Article.new({
+    number: req.body.number,
+    released: new Date(req.body.year + '-' + req.body.month + '-' + req.body.day),
+    title: req.body.title,
+    content: req.body.content,
+    source: req.body.source,
+    pays: req.body.country
+  });
+  article.save(() => {
+    Country.findOne({_id: article.pays}).exec((err, country) => {
+      country.articles.push(article);
+    });
+  }).then(() => {
+    res.redirect('/');
+  }, err => console.log(err));
+});
+
+app.post('/new_country', (req, res) => {
+  let country = Country.new({
+    nom: req.body.nom,
+    url: req.body.url,
+    capitale: req.body.capitale,
+    superficie: req.body.superficie,
+    population: req.body.population,
+    langue: req.body.langue,
+    pnb: req.body.pnb,
+    pnbhab: req.body.pnbhab,
+    idh: req.body.idh,
+    articles: []
+  });
+  country.save().then(() => {
+    res.redirect('/');
+  }, err => console.log(err));
 });
 
 app.listen(3000);

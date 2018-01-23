@@ -5,9 +5,9 @@ const countrySchema = mongoose.Schema({
   url: String,
   capitale: String,
   superficie: Number,
-  population: Number;
+  population: Number,
   langue: String,
-  pnb: Number;
+  pnb: Number,
   pnbhab: Number,
   idh: Number,
   articles: [{type: mongoose.Schema.Types.ObjectId, ref:"Article"}]

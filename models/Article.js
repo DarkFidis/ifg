@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const articleSchema = mongoose.Schema({
-  number: String,
+  number: Number,
   released: Date,
   title: String,
   content: String,
-  source: String,
+  source: {type: mongoose.Schema.Types.ObjectId, ref:"Source"},
   pays: {type: mongoose.Schema.Types.ObjectId, ref:"Country"}
 });
 

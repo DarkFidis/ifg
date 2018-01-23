@@ -7,18 +7,13 @@
         <script src="/lib/jquery-ui/jquery-ui.js"></script>
         <script src="/lib/raphael-min.js"></script>
    			<script src="/js/monde.js"></script>
+        <link rel="stylesheet" href="/Bootstrap-4/css/bootstrap.css">
+        <script type="text/javascript" src="/Bootstrap-4/js/bootstrap.js"></script>
+        <script type="text/javascript" src="/Bootstrap-4/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="/css/components/navbar.css">
 	</head>
 	  <body>
-		  <div id="mapmonde" style='height:768px; width:1024px;'>
-
-		  </div>
-
-		<div id="autres">
-			<ul>
-				<li><a href="europe/ue.html" target="blank">Union Européenne</a></li>
-				<li><a href="moyen-orient/moyenorient.html" target="blank">Moyen-Orient</a></li>
-				<li><a href="economie.html" target="blank">Economie</a></li>
-			</ul>
-		</div>
+      <% include shared/navbar %>
+		  <div id="mapmonde" style='height:768px; width:1024px;'></div>
 	  </body>
 </html>

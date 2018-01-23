@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Nouvel article</title>
+    <link rel="stylesheet" href="/Bootstrap-4/css/bootstrap.css">
+    <script type="text/javascript" src="/Bootstrap-4/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/Bootstrap-4/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/css/components/navbar.css">
+  </head>
+  <body>
+    <% include ../shared/navbar %>
+    <div class="container">
+      <form action="/new_country">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Nom</label>
+          <input type="text" name="nom" class="form-control" id="exampleFormControlInput1" placeholder="Pays">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">URL</label>
+          <input type="text" name="url" class="form-control" id="exampleFormControlInput1" placeholder="URL pays">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Capitale</label>
+          <input type="text" name="capitale" class="form-control" id="exampleFormControlInput1" placeholder="Capitale">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Superficie</label>
+          <input type="number" name="superficie" class="form-control" id="exampleFormControlInput1" placeholder="Superficie">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Population</label>
+          <input type="number" name="population" class="form-control" id="exampleFormControlInput1" placeholder="Population">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Langue</label>
+          <input type="text" name="langue" class="form-control" id="exampleFormControlInput1" placeholder="Langue">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">PNB</label>
+          <input type="number" name="pnb" class="form-control" id="exampleFormControlInput1" placeholder="PNB">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">PNB par habitant</label>
+          <input type="number" name="pnbhab" class="form-control" id="exampleFormControlInput1" placeholder="PNB/hab.">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">IDH</label>
+          <input type="number" name="idh" class="form-control" id="exampleFormControlInput1" placeholder="IDH">
+        </div>
+        <button type="submit" name="button" class="btn btn-primary">Créer pays</button>
+      </form>
+    </div>
+  </body>
+</html>
