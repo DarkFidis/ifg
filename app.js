@@ -33,9 +33,11 @@ app.get('/pays/:pays', (req, res) => {
 });
 
 app.get('/new_article', (req, res) => {
-  Country.find().then((err, countries) => {
-    console.log(country);
-    res.render('forms/article', {countries: countries});
+  Country.find().then((countries, err) => {
+    if(err) { console.log(err); }
+    Source.find().then((sources, err) => {
+      res.render('forms/article', {countries: countries, sources: sources});
+    });
   });
 });
 
@@ -43,10 +45,14 @@ app.get('/new_country', (req, res) => {
   res.render('forms/country');
 });
 
+app.get('/new_source', (req, res) => {
+  res.render('forms/source');
+});
+
 app.post('/new_article', (req, res) => {
   let article = new Article({
     number: req.body.number,
-    released: new Date(req.body.year + '-' + req.body.month + '-' + req.body.day),
+    released: req.body.date,
     title: req.body.title,
     content: req.body.content,
     source: req.body.source,
@@ -75,9 +81,22 @@ app.post('/new_country', (req, res) => {
   });
   country.save((err) => {
     if(err) { throw err; }
-    console.log('Pays créé (ou pas)');
+    console.log('Pays créé');
     res.redirect('/');
   });
+});
+
+app.post('/new_source', (req, res) => {
+  let source = new Source({
+    nom: req.body.nom,
+    city: req.body.city,
+    url: req.body.url
+  });
+  source.save((err) => {
+    if(err) { throw err; }
+    console.log('Source ajoutée');
+    res.redirect('/');
+  })
 });
 
 app.listen(3000);

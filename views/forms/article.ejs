@@ -16,6 +16,7 @@
           <label for="exampleFormControlSelect1">Pays</label>
           <select class="form-control" id="exampleFormControlSelect1" name="country">
             <% countries.forEach((country) => { %>
+              <% console.log(country); %>
               <option value="<%= country._id %>"><%= country.nom %></option>
             <% }); %>
           </select>
@@ -23,11 +24,9 @@
         <div class="form-group">
           <label for="exampleFormControlSelect1">Source</label>
           <select class="form-control" id="exampleFormControlSelect1" name="source">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+            <% sources.forEach((source) => { %>
+              <option value="<%= source._id %>"><%= source.nom %></option>
+            <% }); %>
           </select>
         </div>
         <div class="form-group">
@@ -36,22 +35,7 @@
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput1">Date</label>
-          <p><input type="text" name="day" class="form-control" id="exampleFormControlInput1" placeholder="JJ">/
-            <select class="form-control" id="exampleFormControlSelect1" name="source">
-              <option value="01">Janvier</option>
-              <option value="02">Février</option>
-              <option value="03">Mars</option>
-              <option value="04">Avril</option>
-              <option value="05">Mai</option>
-              <option value="06">Juin</option>
-              <option value="07">Juillet</option>
-              <option value="08">Août</option>
-              <option value="09">Septembre</option>
-              <option value="10">Octobre</option>
-              <option value="11">Novembre</option>
-              <option value="12">Décembre</option>
-            </select>/
-            <input type="text" name="year" class="form-control" id="exampleFormControlInput1" placeholder="AAAA"></p>
+          <input type="date" name="date" value="">
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput1">Titre</label>
