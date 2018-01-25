@@ -29,7 +29,12 @@ app.get('/', (req, res) => {
 app.get('/pays/:pays', (req, res) => {
   Country.findOne({url: req.params.pays}).populate("articles").exec((err, country) => {
     console.log(country);
+    res.render('pays', { country: country });
   });
+});
+
+app.get('/article', (req, res) => {
+  res.render('read');
 });
 
 app.get('/new_article', (req, res) => {
