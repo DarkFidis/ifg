@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const Article = require('./models/Article');
 const Country = require('./models/Country');
 const Source = require('./models/Source');
+const moment = require('./middlewares/datefr');
 
 mongoose.connect('mongodb://localhost/geopolitique');
 
@@ -33,8 +34,11 @@ app.get('/pays/:pays', (req, res) => {
   });
 });
 
-app.get('/article', (req, res) => {
-  res.render('read');
+app.get('/article/:id', (req, res) => {
+  Article.findOne({_id: req.params.id}).populate("pays").populate("source").exec((err, article) => {
+    console.log(article);
+    res.render('read', {article: article});
+  });
 });
 
 app.get('/new_article', (req, res) => {
@@ -57,7 +61,7 @@ app.get('/new_source', (req, res) => {
 app.post('/new_article', (req, res) => {
   let article = new Article({
     number: req.body.number,
-    released: req.body.date,
+    released: moment(req.body.date),
     title: req.body.title,
     content: req.body.content,
     source: req.body.source,
@@ -66,8 +70,8 @@ app.post('/new_article', (req, res) => {
   article.save(() => {
     Country.findOne({_id: article.pays}).exec((err, country) => {
       country.articles.push(article);
+      country.save();
     });
-  }).then(() => {
     res.redirect('/');
   }, err => console.log(err));
 });
@@ -102,6 +106,15 @@ app.post('/new_source', (req, res) => {
     console.log('Source ajoutée');
     res.redirect('/');
   })
+});
+
+app.delete('/article/:id', (req, res) => {
+  Article.findOne({_id: req.params.id}).populate("pays").exec((err, article) => {
+    remove(article.pays.articles, article._id);
+    Article.remove({_id: req.params.id}, () => {
+      res.redirect('/');
+    });
+  });
 });
 
 app.listen(3000);

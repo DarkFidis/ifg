@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
+require('mongoose-moment')(mongoose);
+const moment = require('../middlewares/datefr');
 
 const articleSchema = mongoose.Schema({
   number: Number,
-  released: Date,
+  released: 'Moment',
   title: String,
   content: String,
   source: {type: mongoose.Schema.Types.ObjectId, ref:"Source"},

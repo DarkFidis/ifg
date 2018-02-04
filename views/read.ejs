@@ -17,11 +17,17 @@
       <% include shared/navbar %>
 		  <div class="container">
         <div class="entry-header space-top">
-          <h1 class="entry-title">Titre de l'article</h1>
+          <h1 class="entry-title"><%= article.title %></h1>
           <div class="entry-meta">
-            <p>Courrier International N°1287, 5 juillet 2015</p>
+            <p>Courrier International N°<%= article.number %>, <%= article.released.format("DD MMMM YYYY") %></p>
           </div>
         </div>
+				<div class="entry-content">
+					<p><%= article.content %></p>
+					<br>
+					<p><em><a href="<%= article.source.url %>"><%= article.source.nom %></a></em>, <%= article.source.city %></p>
+				</div>
+				<a href="/pays/<%= article.pays.url %>" class="btn btn-primary">Retour Pays</a>
       </div>
 	  </body>
 </html>
